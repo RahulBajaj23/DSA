@@ -50,6 +50,7 @@ class Slinkedlist:
                 print(tempnode.value)
                 tempnode=tempnode.next
 
+    # search a nodevalue
     def search(self,value):
         if self.head is None:
             print("sll does not exits")
@@ -59,20 +60,63 @@ class Slinkedlist:
                 if tempnode.value==value:
                     return tempnode.value
                 tempnode=tempnode.next
-            return "Value not exits"
-
+            return "Value not exists"
+ 
+    # delete a node
+    def delete(self,position):
+        if self.head is None:
+            print("LinkedList not exist")
+        else:
+            if position==0:
+                if self.head==self.tail:
+                    self.head=None
+                    self.tail=None
+                else:
+                    self.head=self.head.next
+            elif position==1:
+                if self.head == self.tail:
+                    self.head = None
+                    self.tail = None
+                else:
+                    tempnode=self.head
+                    while tempnode is not None:
+                        if tempnode.next==self.tail:
+                            break
+                        tempnode=tempnode.next
+                    tempnode.next=None
+                    self.tail=tempnode
+            else:
+                tempnode=self.head
+                index=0
+                while index<position-1:
+                    tempnode=tempnode.next
+                    index+=1
+                nextnode=tempnode.next
+                tempnode.next=nextnode.next
 
 
 
 
 singlylinklist = Slinkedlist()
-singlylinklist.insert(8, 1)
-singlylinklist.insert(3, 1)
-singlylinklist.insert(0, 0)
-singlylinklist.insert(4, 1)
+singlylinklist.insert(2,3)
+
+singlylinklist.insert(0,0)
+
+singlylinklist.insert(3,1)
+
+singlylinklist.insert(2,2)
+
+singlylinklist.insert(6,1)
+
+singlylinklist.insert(4,5)
+
+
+
 print([node.value for node in singlylinklist])
 
 singlylinklist.traversal()
 
-print(singlylinklist.search(4))
+# print(singlylinklist.search(4))
 
+# singlylinklist.delete(2)
+# print([node.value for node in singlylinklist])
