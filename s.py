@@ -1,78 +1,31 @@
 class Node:
-    def __init__(self, value=None):
-        self.value = value
-        self.next = None
+    def __init__(self, key):
+        self.left = None
+        self.right = None
+        self.val = key
 
 
-class Slinkedlist:
-    def __init__(self):
-        self.head = None
-        self.tail = None
+# A function to do preorder tree traversal
+def printPreorder(root):
+    if root:
+        # First print the data of node
+        print(root.val),
 
-    def __iter__(self):
-        Node = self.head
-        while Node:
-            yield Node
-            Node = Node.next
+        # Then recur on left child
+        printPreorder(root.left)
 
-    # Insert a node in linkedlist
-    def insert(self, value, position):
-        newnode = Node(value)
-        if self.head is None:
-            self.head = newnode
-            self.tail = newnode
-        else:
-            if position == 0:
-                newnode.next = self.head
-                self.head = newnode
-            elif position == 1:
-                newnode.next = None
-                self.tail.next = newnode
-                self.tail = newnode
-            else:
-                tempnode = self.head
-                index = 0
-                while index < position - 1:
-                    tempnode = tempnode.next
-                    index += 1
-                nextnode = tempnode.next
-                tempnode.next = newnode
-                newnode.next = nextnode
+        # Finally recur on right child
+        printPreorder(root.right)
 
 
-    # Traverse singlylinkedlist
-    def traversal(self):
-        if self.head is None:
-            print("singlyLinkedlist is not exist")
-        else:
-            tempnode=self.head
-            while tempnode is not None:
-                print(tempnode.value)
-                tempnode=tempnode.next
+# Driver code
+if __name__ == "__main__":
+    root = Node(1)
+    root.left = Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
 
-    def search(self,value):
-        if self.head is None:
-            print("sll does not exits")
-        else:
-            tempnode=self.head
-            while tempnode is not None:
-                if tempnode.value==value:
-                    return tempnode.value
-                tempnode=tempnode.next
-            return "Value not exits"
-
-
-
-
-
-singlylinklist = Slinkedlist()
-singlylinklist.insert(8, 1)
-singlylinklist.insert(3, 1)
-singlylinklist.insert(0, 0)
-singlylinklist.insert(4, 1)
-print([node.value for node in singlylinklist])
-
-singlylinklist.traversal()
-
-print(singlylinklist.search(4))
-
+    # Function call
+    "Preorder traversal of binary tree is"
+    printPreorder(root)

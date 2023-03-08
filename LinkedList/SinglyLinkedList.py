@@ -50,6 +50,16 @@ class Slinkedlist:
                 print(tempnode.value)
                 tempnode=tempnode.next
 
+    def reverse(self):
+        prev = None
+        current = self.head
+        while (current is not None):
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+
     # search a nodevalue
     def search(self,value):
         if self.head is None:
@@ -115,6 +125,9 @@ singlylinklist.insert(4,5)
 print([node.value for node in singlylinklist])
 
 singlylinklist.traversal()
+singlylinklist.reverse()
+print([node.value for node in singlylinklist])
+
 
 # print(singlylinklist.search(4))
 
